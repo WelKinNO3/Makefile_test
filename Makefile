@@ -10,7 +10,7 @@ BUILD_DIR=build_$(ARCH)#确认可重定位文件的文件夹（需要自行建�
 
 OBJS=$(patsubst %.c,$(BUILD_DIR)/%.o,$(notdir $(SCRS))) #确认可重定位文件的名称
 
-TARGET=fifo_debug	#确认目标文件名称
+TARGET=Ptread_debug	#确认目标文件名称
 
 INC=$(foreach var,$(INC_DIR),$(wildcard $(var)/*.h)) #确认头文件名称
 
@@ -25,9 +25,9 @@ CC=arm-linux-gnueabihf-gcc
 endif
 
 $(BUILD_DIR)/$(TARGET):$(OBJS)
-	$(CC) $(OBJS)  -o $(TARGET) 
+	$(CC)   $(OBJS)  -o $(TARGET) $(Opt)
 $(BUILD_DIR)/%.o:$(SCR_DIR)/%.c | create_build 
-	$(CC) $(gdb_flag)  -c $< -o $@ $(DEBUG_FLAG)
+	$(CC) $(PATH_G)  $(gdb_flag)  -c $< -o $@ $(DEBUG_FLAG) $(Opt)
 
 .PHONY:prin create_build
 
